@@ -12,6 +12,7 @@ import { orderReducer } from './slices/order-slice';
 import { userReducer } from './slices/user-slice';
 import { feedReducer } from './slices/feed-slice';
 import { ordersReducer } from './slices/orders-slice';
+import { orderInfoReducer } from './slices/order-info-slice';
 
 const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
   order: orderReducer,
   user: userReducer,
   feed: feedReducer,
-  orders: ordersReducer
+  orders: ordersReducer,
+  orderInfo: orderInfoReducer
 });
 
 const store = configureStore({

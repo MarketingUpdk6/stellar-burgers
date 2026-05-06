@@ -5,43 +5,41 @@ import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient, TOrder } from '@utils-types';
 
-import { useSelector } from '../../services/store';
+import { useDispatch, useSelector } from '../../services/store';
 import {
   selectFeedOrders,
   selectIngredients,
+  selectOrderInfo,
   selectProfileOrders
 } from '../../services/selectors';
 
-import { getOrderByNumberApi } from '../../utils/burger-api';
+import {
+  clearOrderInfo,
+  fetchOrderByNumber
+} from '../../services/slices/order-info-slice';
 
 export const OrderInfo: FC = () => {
+  const dispatch = useDispatch();
   const { number } = useParams();
 
   const ingredients = useSelector(selectIngredients);
   const feedOrders = useSelector(selectFeedOrders);
   const profileOrders = useSelector(selectProfileOrders);
+  const orderFromStore = useSelector(selectOrderInfo);
 
-  const [orderData, setOrderData] = useState<TOrder | null>(null);
+  const foundOrder = [...feedOrders, ...profileOrders].find(
+    (order) => order.number === Number(number)
+  );
+
+  const orderData = foundOrder || orderFromStore;
 
   useEffect(() => {
-    const foundOrder = [...feedOrders, ...profileOrders].find(
-      (order) => order.number === Number(number)
-    );
-
-    if (foundOrder) {
-      setOrderData(foundOrder);
-      return;
+    if (!foundOrder && number) {
+      dispatch(fetchOrderByNumber(Number(number)));
     }
-
-    if (number) {
-      getOrderByNumberApi(Number(number))
-        .then((data) => {
-          setOrderData(data.orders[0]);
-        })
-        .catch(() => {
-          setOrderData(null);
-        });
-    }
+    return () => {
+      dispatch(clearOrderInfo());
+    };
   }, [number, feedOrders, profileOrders]);
 
   const orderInfo = useMemo(() => {

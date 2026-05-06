@@ -42,3 +42,19 @@ export const selectProfileOrdersLoading = (state: RootState) =>
 
 export const selectProfileOrdersError = (state: RootState) =>
   state.orders.error;
+
+export const selectOrderInfo = (state: RootState) => state.orderInfo.order;
+
+export const selectOrderInfoLoading = (state: RootState) =>
+  state.orderInfo.isLoading;
+
+export const selectOrderInfoError = (state: RootState) => state.orderInfo.error;
+
+export const selectBuns = (state: RootState) =>
+  state.ingredients.ingredients.filter((item) => item.type === 'bun');
+
+export const selectMains = (state: RootState) =>
+  state.ingredients.ingredients.filter((item) => item.type === 'main');
+
+export const selectSauces = (state: RootState) =>
+  state.ingredients.ingredients.filter((item) => item.type === 'sauce');
