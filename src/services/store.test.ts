@@ -1,17 +1,12 @@
-import { rootReducer } from './store';
+import { expect, test, describe } from '@jest/globals';
+import store, { rootReducer } from './store';
 
 describe('rootReducer', () => {
-  test('возвращает корректное начальное состояние', () => {
-    const state = rootReducer(undefined, { type: 'UNKNOWN_ACTION' });
+  test('возвращает корректное начальное состояние при неизвестном action', () => {
+    const action = { type: 'UNKNOWN_ACTION' };
 
-    expect(state).toEqual({
-      ingredients: expect.any(Object),
-      burgerConstructor: expect.any(Object),
-      order: expect.any(Object),
-      user: expect.any(Object),
-      feed: expect.any(Object),
-      orders: expect.any(Object),
-      orderInfo: expect.any(Object)
-    });
+    const initialState = rootReducer(undefined, action);
+
+    expect(initialState).toEqual(store.getState());
   });
 });

@@ -5,6 +5,8 @@ import {
   moveIngredient
 } from './constructor-slice';
 
+import { TIngredient } from '@utils-types';
+
 let uuidCounter = 0;
 
 beforeAll(() => {
@@ -15,16 +17,32 @@ beforeAll(() => {
   });
 });
 
-const bun = {
+const bun: TIngredient = {
   _id: '1',
   name: 'Булка',
-  type: 'bun'
+  type: 'bun',
+  proteins: 10,
+  fat: 10,
+  carbohydrates: 10,
+  calories: 100,
+  price: 100,
+  image: '',
+  image_mobile: '',
+  image_large: ''
 };
 
-const main = {
+const main: TIngredient = {
   _id: '2',
   name: 'Котлета',
-  type: 'main'
+  type: 'main',
+  proteins: 20,
+  fat: 20,
+  carbohydrates: 20,
+  calories: 200,
+  price: 200,
+  image: '',
+  image_mobile: '',
+  image_large: ''
 };
 
 describe('constructorSlice', () => {

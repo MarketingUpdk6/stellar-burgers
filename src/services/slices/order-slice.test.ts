@@ -1,8 +1,4 @@
-import {
-  orderReducer,
-  createOrder,
-  closeOrderModal
-} from './order-slice';
+import { orderReducer, createOrder, closeOrderModal } from './order-slice';
 
 const orderMock = {
   _id: 'order-id',
@@ -23,10 +19,7 @@ const orderMock = {
 
 describe('orderSlice', () => {
   test('устанавливает orderRequest=true при pending', () => {
-    const state = orderReducer(
-      undefined,
-      createOrder.pending('', ['1', '2'])
-    );
+    const state = orderReducer(undefined, createOrder.pending('', ['1', '2']));
 
     expect(state.orderRequest).toBe(true);
     expect(state.error).toBeNull();

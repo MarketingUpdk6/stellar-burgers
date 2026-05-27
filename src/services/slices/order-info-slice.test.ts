@@ -1,7 +1,4 @@
-import {
-  orderInfoReducer,
-  fetchOrderByNumber
-} from './order-info-slice';
+import { orderInfoReducer, fetchOrderByNumber } from './order-info-slice';
 
 const orderMock = {
   _id: 'order-1',
@@ -44,11 +41,7 @@ describe('orderInfoSlice', () => {
   test('сохраняет ошибку и устанавливает isLoading=false при rejected', () => {
     const state = orderInfoReducer(
       undefined,
-      fetchOrderByNumber.rejected(
-        new Error('Ошибка загрузки'),
-        '',
-        12345
-      )
+      fetchOrderByNumber.rejected(new Error('Ошибка загрузки'), '', 12345)
     );
 
     expect(state.isLoading).toBe(false);
